@@ -2,7 +2,7 @@ encryptionsalt: v1:YPDN1qIm77g=:v1:pEtLT+hD25ySG5Zj:31jU6GlQ3EEj7pzrNhuZ84I6v4tQ
 config:
   aws:region: us-east-2
   awsx:desiredClusterSize: "1"
-  awsx:eksNodeInstanceType: t2.micro
+  awsx:eksNodeInstanceType: t3.medium
   awsx:maxClusterSize: "1"
   awsx:minClusterSize: "1"
   awsx:vpcNetworkCidr: 10.0.0.0/16
