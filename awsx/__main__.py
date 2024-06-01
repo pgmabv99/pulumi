@@ -60,7 +60,7 @@ class awsx_test:
 
         # Define a deployment for a sample web server (nginx)
         app_labels = {"app": "nginx"}
-        self.deployment = k8s.apps.v1.Deployment("nginx-deployment",
+        self.k8s_deployment = k8s.apps.v1.Deployment("nginx-deployment",
             spec=k8s.apps.v1.DeploymentSpecArgs(
                 selector=k8s.meta.v1.LabelSelectorArgs(
                     match_labels=app_labels,
@@ -85,7 +85,7 @@ class awsx_test:
         )
 
         # Define a service to expose the nginx deployment
-        self.service = k8s.core.v1.Service("nginx-service",
+        self.k8s_service = k8s.core.v1.Service("nginx-service",
             spec=k8s.core.v1.ServiceSpecArgs(
                 selector=app_labels,
                 ports=[k8s.core.v1.ServicePortArgs(
@@ -97,14 +97,24 @@ class awsx_test:
             opts=pulumi.ResourceOptions(provider=k8s_provider)
         )
 
+    def kubconfig_write(self, v):
+        import json
+        with open("kubeconfig", "w") as f:
+            f.write(json.dumps(v))
+        print("kubeconfig written to kubeconfig file")
+        
+    def nginx_test(self, hostname):
+        print("hostname via 55 >..", hostname)
 
     def export(self):
         # Export values to use elsewhere
-        pulumi.export("nginx_service_ip", self.service.status.load_balancer.ingress[0].ip)
-        pulumi.export("status", self.service.status)
-        print("xxx",self.service.status)
-        # pulumi.export("kubeconfig", self.eks_cluster.kubeconfig)
-        pulumi.export("vpcId", self.eks_vpc.vpc_id)
+        pulumi.export("status", self.k8s_service.status)
+        
+        self.k8s_service.status.apply(lambda parm: self.nginx_test(parm.load_balancer.ingress[0].hostname))
+        self.eks_cluster.kubeconfig.apply(lambda txt: self.kubconfig_write(txt))
+        # cnnot return output to mainline context
+        xxx=pulumi.Output.concat("xxx 666", self.k8s_service.status)
+        # print("xxx", xxx)
 
 # import debugpy
 # debugpy.listen(("localhost", 5678))
@@ -114,7 +124,7 @@ class awsx_test:
 
 
 #high level API
-t=awsx_test()
-t.cluster_create()
-t.deploy_web_server()
-t.export()
+# t=awsx_test()
+# t.cluster_create()
+# t.deploy_web_server()
+# t.export()
