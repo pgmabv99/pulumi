@@ -1,0 +1,2 @@
+-cd awsx for pulumi
+-not possible debugger
