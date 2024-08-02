@@ -116,11 +116,14 @@ class awsx_test:
         xxx=pulumi.Output.concat("xxx 666", self.k8s_service.status)
         # print("xxx", xxx)
 
-# import debugpy
-# debugpy.listen(("localhost", 5678))
-# print("Waiting for debugger attach...")
-# debugpy.wait_for_client()  # Only include this line if you want the script to pause until the debugger is attached.
-# print("Debugger attached.")
+import debugpy
+debugpy.listen(("localhost", 5678))
+print("Waiting for debugger attach...")
+debugpy.wait_for_client()  # Only include this line if you want the script to pause until the debugger is attached.
+print("Debugger attached.")
+# debugpy.breakpoint()
+a=1
+b=2
 
 
 #high level API
