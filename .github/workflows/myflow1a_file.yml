@@ -41,9 +41,11 @@ jobs:
         echo "xxx${{ secrets.MYSECRET1}}yyy"
         echo "try to display env var  mysecret1var"
         echo "xxx${MYSECRET1VAR}yyy"
-        if [ "$MYSECRET1VAR" = "mysecret1_value" ]; then
-          echo "The variable matches prod1 ."
+        if [ "$MYSECRET1VAR" = "prod1" ]; then
+          echo "The variable matches prod1 "
+        elif [ "$MYSECRET1VAR" = "dev1" ]; then
+          echo "The variable matches dev1 "
         else
-          echo "The variable does not match  ."
+          echo "The variable does not match "
         fi        
 
