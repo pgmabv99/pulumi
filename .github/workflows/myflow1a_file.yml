@@ -35,7 +35,7 @@ jobs:
         echo "branch display"
         git branch
         echo "=============="
-        echo "The current environment is ${{ job.environment.name }}"
+        echo "The current22 environment is ${{ job.environment.name }}"
         echo "=============="
         echo "try to display secret mysecret1"
         echo "xxx${{ secrets.MYSECRET1}}yyy"
