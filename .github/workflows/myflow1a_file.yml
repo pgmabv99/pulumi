@@ -14,6 +14,9 @@ on:
 jobs:
   mybuild1:
     runs-on: ubuntu-latest
+    # environment: prod1
+    environment: ${{ github.event.ref == 'refs/heads/main' && 'prod1' || 'dev1' }}
+
 
     steps:
     - name: Checkout code
@@ -25,11 +28,22 @@ jobs:
         python-version: '3.11'
 
     - name: test
-
+      env:
+        MYSECRET1VAR: ${{ secrets.MYSECRET1 }} 
       run: |
         echo $PATH | tr ':' '\n'
         echo "branch display"
-        echo "branch display2"
-        echo "branch display3"
         git branch
+        echo "=============="
+        echo "The current22 environment is ${{ job.environment.name }}"
+        echo "=============="
+        echo "try to display secret mysecret1"
+        echo "xxx${{ secrets.MYSECRET1}}yyy"
+        echo "try to display env var  mysecret1var"
+        echo "xxx${MYSECRET1VAR}yyy"
+        if [ "$MYSECRET1VAR" = "mysecret1_value" ]; then
+          echo "The variable matches prod1 ."
+        else
+          echo "The variable does not match  ."
+        fi        
 
