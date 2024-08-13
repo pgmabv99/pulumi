@@ -30,5 +30,6 @@ jobs:
         echo $PATH | tr ':' '\n'
         echo "branch display"
         echo "branch display2"
+        echo "branch display3"
         git branch
 
