@@ -28,5 +28,7 @@ jobs:
 
       run: |
         echo $PATH | tr ':' '\n'
+        echo "branch display"
+        echo "branch display2"
         git branch
 
