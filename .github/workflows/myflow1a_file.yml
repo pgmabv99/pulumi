@@ -34,12 +34,15 @@ jobs:
         echo $PATH | tr ':' '\n'
         echo "branch display"
         git branch
+        echo "=============="
+        echo "The current environment is ${{ job.environment.name }}"
+        echo "=============="
         echo "try to display secret mysecret1"
         echo "xxx${{ secrets.MYSECRET1}}yyy"
         echo "try to display env var  mysecret1var"
         echo "xxx${MYSECRET1VAR}yyy"
         if [ "$MYSECRET1VAR" = "mysecret1_value" ]; then
-          echo "The variable matches ."
+          echo "The variable matches prod1 ."
         else
           echo "The variable does not match  ."
         fi        
