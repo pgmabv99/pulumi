@@ -25,7 +25,7 @@ jobs:
         python-version: '3.11'
 
     - name: test
-      run:
+      run: |
         echo $PATH | tr ':' '\n'
         git branch
 
