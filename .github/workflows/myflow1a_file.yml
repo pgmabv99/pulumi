@@ -30,6 +30,6 @@ jobs:
         echo $PATH | tr ':' '\n'
         echo "branch display"
         git branch
-        echo "mysecret1"
-        echo ${{ secrets.MYSECRET1}}
+        echo "try to display mysecret1"
+        echo "xxx${{ secrets.MYSECRET1}}yyy"
 
