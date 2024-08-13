@@ -14,6 +14,7 @@ on:
 jobs:
   mybuild1:
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
     - name: Checkout code
