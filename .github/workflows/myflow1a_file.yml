@@ -26,11 +26,14 @@ jobs:
         python-version: '3.11'
 
     - name: test
-
+      env:
+        MYSECRET1VAR: ${{ secrets.MYSECRET1 }} 
       run: |
         echo $PATH | tr ':' '\n'
         echo "branch display"
         git branch
-        echo "try to display mysecret1"
+        echo "try to display secret mysecret1"
         echo "xxx${{ secrets.MYSECRET1}}yyy"
+        echo "try to display env var  mysecret1var"
+        echo "xxx${MYSECRET1VAR}yyy"
 
